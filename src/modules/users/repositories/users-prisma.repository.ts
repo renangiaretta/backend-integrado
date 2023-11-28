@@ -1,5 +1,9 @@
 import { CreateUserDto } from './../dto/create-user.dto';
-import { ConflictException, Injectable } from '@nestjs/common';
+import {
+    BadRequestException,
+    ConflictException,
+    Injectable,
+} from '@nestjs/common';
 import { User } from '../entities/user.entity';
 import { UsersRepository } from './users.repository';
 import { PrismaService } from 'src/database/prisma.service';
@@ -14,6 +18,13 @@ export class UsersPrismaRepository implements UsersRepository {
         });
         if (emailAlreadyRegistered) {
             throw new ConflictException('E-mail já cadastrado.');
+        }
+        if (data.cep) {
+            const cepRegex = /^\d{5}-?\d{3}$/;
+            const validCep = cepRegex.test(data.cep);
+            if (!validCep) {
+                throw new BadRequestException('CEP inválido.');
+            }
         }
         const newUser = await this.prisma.user.create({
             data: { ...data },
