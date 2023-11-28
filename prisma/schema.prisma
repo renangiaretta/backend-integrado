@@ -11,16 +11,16 @@ datasource db {
 }
 
 model User {
-  id        String    @id @default(uuid())
+  id        String   @id @default(uuid())
   name      String
-  email     String
+  email     String   @unique()
   phone     String
   cep       String?
-  cpf       String?
+  cpf       String?  @unique()
   birthDate String?
-  document  String[]  @default([])
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt()
+  document  String[] @default([])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt()
 
   @@map("users")
 }
