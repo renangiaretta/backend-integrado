@@ -1,5 +1,6 @@
 import {
     IsArray,
+    IsDateString,
     IsEmail,
     IsNotEmpty,
     IsOptional,
@@ -26,7 +27,8 @@ export class CreateUserDto {
     cpf: string;
     @IsOptional()
     @IsString()
-    birthDate: string;
+    @IsDateString()
+    birthdate: Date;
     @IsOptional()
     @IsArray()
     document: string[];

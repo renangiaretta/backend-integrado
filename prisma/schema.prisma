@@ -17,7 +17,7 @@ model User {
   phone     String
   cep       String?
   cpf       String?  @unique()
-  birthDate String?
+  birthdate String?
   document  String[] @default([])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt()

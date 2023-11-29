@@ -10,19 +10,19 @@ export class UsersService {
         return await this.usersRepository.create(createUserDto);
     }
 
-    findAll() {
-        return `This action returns all users`;
+    async findAll() {
+        return await this.usersRepository.findAll();
     }
 
-    findOne(id: number) {
-        return `This action returns a #${id} user`;
+    async findOne(email: string) {
+        return await this.usersRepository.findOne(email);
     }
 
-    update(id: number, updateUserDto: UpdateUserDto) {
-        return `This action updates a #${id} user`;
+    update(id: string, updateUserDto: UpdateUserDto) {
+        return this.usersRepository.update(id, updateUserDto);
     }
 
-    remove(id: number) {
+    async remove(id: number) {
         return `This action removes a #${id} user`;
     }
 }
