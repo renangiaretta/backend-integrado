@@ -14,6 +14,15 @@ import { UpdateUserDto } from '../dto/update-user.dto';
 @Injectable()
 export class UsersPrismaRepository implements UsersRepository {
     constructor(private prisma: PrismaService) {}
+
+    private validateCep(cep: string): void {
+        const cepRegex: RegExp = /^\d{5}-?\d{3}$/;
+        const validCep: boolean = cepRegex.test(cep);
+        if (!validCep) {
+            throw new BadRequestException('CEP inválido.');
+        }
+    }
+
     async create(data: CreateUserDto): Promise<User> {
         const emailAlreadyRegistered = await this.prisma.user.findUnique({
             where: { email: data.email },
@@ -21,13 +30,7 @@ export class UsersPrismaRepository implements UsersRepository {
         if (emailAlreadyRegistered) {
             throw new ConflictException('E-mail já cadastrado.');
         }
-        if (data.cep) {
-            const cepRegex: RegExp = /^\d{5}-?\d{3}$/;
-            const validCep: boolean = cepRegex.test(data.cep);
-            if (!validCep) {
-                throw new BadRequestException('CEP inválido.');
-            }
-        }
+        this.validateCep(data.cep);
         const newUser = await this.prisma.user.create({
             data: { ...data },
         });
@@ -51,6 +54,7 @@ export class UsersPrismaRepository implements UsersRepository {
         if (!userExists) {
             throw new ConflictException('Usuário não encontrado');
         }
+        this.validateCep(data.cep);
         const updatedUser = await this.prisma.user.update({
             where: { id },
             data: { ...data },
