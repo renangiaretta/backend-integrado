@@ -11,16 +11,31 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(uuid())
+  id        String    @id @default(uuid())
   name      String
-  email     String   @unique()
+  email     String    @unique()
   phone     String
   cep       String?
-  cpf       String?  @unique()
-  birthdate String?
-  document  String[] @default([])
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt()
+  cpf       String?   @unique()
+  birthdate DateTime?
+  document  String[]  @default([])
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt()
+  courses   Course[]
 
   @@map("users")
+}
+
+model Course {
+  id          Int     @id @default(autoincrement())
+  name        String
+  description String
+  modality    String
+  type        String
+  duration    Int
+  price       Float
+  userId      String?
+  User        User?   @relation(fields: [userId], references: [id])
+
+  @@map("courses")
 }

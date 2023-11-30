@@ -24,15 +24,18 @@ export class UsersPrismaRepository implements UsersRepository {
     }
 
     async create(data: CreateUserDto): Promise<User> {
+        this.validateCep(data.cep);
         const emailAlreadyRegistered = await this.prisma.user.findUnique({
             where: { email: data.email },
         });
         if (emailAlreadyRegistered) {
             throw new ConflictException('E-mail já cadastrado.');
         }
-        this.validateCep(data.cep);
+        const coursesConnect = data.courses?.map((courseId) => ({
+            id: courseId,
+        }));
         const newUser = await this.prisma.user.create({
-            data: { ...data },
+            data: { ...data, courses: { connect: coursesConnect } },
         });
         return plainToInstance(User, newUser);
     }
@@ -50,14 +53,17 @@ export class UsersPrismaRepository implements UsersRepository {
         return plainToInstance(User, user);
     }
     async update(id: string, data: UpdateUserDto) {
+        this.validateCep(data.cep);
         const userExists = await this.prisma.user.findUnique({ where: { id } });
         if (!userExists) {
             throw new ConflictException('Usuário não encontrado');
         }
-        this.validateCep(data.cep);
+        const coursesIds = data.courses.map((courseId) => ({
+            id: courseId,
+        }));
         const updatedUser = await this.prisma.user.update({
             where: { id },
-            data: { ...data },
+            data: { ...data, courses: { set: coursesIds } },
         });
         return plainToInstance(User, updatedUser);
     }

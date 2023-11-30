@@ -32,4 +32,7 @@ export class CreateUserDto {
     @IsOptional()
     @IsArray()
     document: string[];
+    @IsOptional()
+    @IsArray()
+    courses: number[];
 }
