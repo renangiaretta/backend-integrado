@@ -24,7 +24,9 @@ export class UsersPrismaRepository implements UsersRepository {
     }
 
     async create(data: CreateUserDto): Promise<User> {
-        this.validateCep(data.cep);
+        if (data.cep) {
+            this.validateCep(data.cep);
+        }
         const emailAlreadyRegistered = await this.prisma.user.findUnique({
             where: { email: data.email },
         });
@@ -53,7 +55,9 @@ export class UsersPrismaRepository implements UsersRepository {
         return plainToInstance(User, user);
     }
     async update(id: string, data: UpdateUserDto) {
-        this.validateCep(data.cep);
+        if (data.cep) {
+            this.validateCep(data.cep);
+        }
         const userExists = await this.prisma.user.findUnique({ where: { id } });
         if (!userExists) {
             throw new ConflictException('Usuário não encontrado');
