@@ -34,6 +34,7 @@ model Course {
   type        String
   duration    Int
   price       Float
+  image       String
   userId      String?
   User        User?   @relation(fields: [userId], references: [id])
 

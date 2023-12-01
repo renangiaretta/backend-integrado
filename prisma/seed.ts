@@ -12,7 +12,7 @@ const seedDatabase = async () => {
                 });
             }),
         );
-        console.log('Seed database completed');
+        console.log('Seed database complete');
     } else {
         console.log('Database already seeded');
     }
@@ -35,6 +35,7 @@ interface ICourse {
     type: string;
     duration: number;
     price: number;
+    image: string;
 }
 
 export const allCourses: ICourse[] = [
@@ -46,6 +47,7 @@ export const allCourses: ICourse[] = [
         type: 'Graduação',
         duration: 60,
         price: 20000.0,
+        image: 'https://imagens.grupointegrado.br/img/banners/1648498063000000.jpg',
     },
     {
         name: 'Direito',
@@ -55,6 +57,7 @@ export const allCourses: ICourse[] = [
         type: 'Graduação',
         duration: 48,
         price: 25000.0,
+        image: 'https://imagens.grupointegrado.br/img/banners/1648496497000000.jpg',
     },
     {
         name: 'Administração',
@@ -64,6 +67,7 @@ export const allCourses: ICourse[] = [
         type: 'Graduação',
         duration: 48,
         price: 15000.0,
+        image: 'https://imagens.grupointegrado.br/img/banners/1649363119000000.png',
     },
     {
         name: 'Enfermagem',
@@ -73,6 +77,7 @@ export const allCourses: ICourse[] = [
         type: 'Graduação',
         duration: 48,
         price: 30000.0,
+        image: 'https://imagens.grupointegrado.br/img/banners/1648497306000000.jpg',
     },
     {
         name: 'Biologia',
@@ -82,6 +87,7 @@ export const allCourses: ICourse[] = [
         type: 'Graduação',
         duration: 48,
         price: 30000.0,
+        image: 'https://imagens.grupointegrado.br/img/banners/1648497306000000.jpg',
     },
     {
         name: 'Agronomia',
@@ -91,6 +97,7 @@ export const allCourses: ICourse[] = [
         type: 'Pós-graduação',
         duration: 48,
         price: 30000.0,
+        image: 'https://imagens.grupointegrado.br/img/banners/1648496497000000.jpg',
     },
     {
         name: 'Psicologia',
@@ -100,6 +107,7 @@ export const allCourses: ICourse[] = [
         type: 'Graduação',
         duration: 48,
         price: 45000.0,
+        image: 'https://imagens.grupointegrado.br/img/banners/1648496822000000.jpg',
     },
     {
         name: 'Odontologia',
@@ -109,6 +117,7 @@ export const allCourses: ICourse[] = [
         type: 'Pós-graduação',
         duration: 48,
         price: 30000.0,
+        image: 'https://imagens.grupointegrado.br/img/banners/1648551737000000.jpg',
     },
     {
         name: 'Análise e Desenvolvimento de Sistemas',
@@ -118,6 +127,7 @@ export const allCourses: ICourse[] = [
         type: 'Graduação',
         duration: 48,
         price: 30000.0,
+        image: '',
     },
     {
         name: 'Engenharia Elétrica',
@@ -127,5 +137,6 @@ export const allCourses: ICourse[] = [
         type: 'Pós-graduação',
         duration: 48,
         price: 30000.0,
+        image: 'https://imagens.grupointegrado.br/img/banners/1649363119000000.png',
     },
 ];
