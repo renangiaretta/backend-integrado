@@ -33,6 +33,14 @@ export class UsersPrismaRepository implements UsersRepository {
         if (emailAlreadyRegistered) {
             throw new ConflictException('E-mail já cadastrado.');
         }
+        if (data.cpf) {
+            const cpfAlreadyRegistered = await this.prisma.user.findUnique({
+                where: { cpf: data.cpf },
+            });
+            if (cpfAlreadyRegistered) {
+                throw new ConflictException('CPF já cadastrado.');
+            }
+        }
         const coursesConnect = data.courses?.map((courseId) => ({
             id: courseId,
         }));
@@ -61,6 +69,14 @@ export class UsersPrismaRepository implements UsersRepository {
         const userExists = await this.prisma.user.findUnique({ where: { id } });
         if (!userExists) {
             throw new ConflictException('Usuário não encontrado');
+        }
+        if (data.cpf) {
+            const cpfAlreadyRegistered = await this.prisma.user.findUnique({
+                where: { cpf: data.cpf },
+            });
+            if (cpfAlreadyRegistered) {
+                throw new ConflictException('CPF já cadastrado.');
+            }
         }
         const coursesIds = data.courses.map((courseId) => ({
             id: courseId,

@@ -7,6 +7,8 @@ export class User {
     cpf?: string;
     birthdate: Date;
     document: string[];
+    city?: string;
+    state?: string;
     createdAt: Date;
     updatedAt: Date;
 }

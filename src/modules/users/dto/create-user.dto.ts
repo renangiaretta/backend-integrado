@@ -33,6 +33,12 @@ export class CreateUserDto {
     @IsArray()
     document: string[];
     @IsOptional()
+    @IsString()
+    city: string;
+    @IsOptional()
+    @IsString()
+    state: string;
+    @IsOptional()
     @IsArray()
     courses: number[];
 }

@@ -127,7 +127,7 @@ export const allCourses: ICourse[] = [
         type: 'Graduação',
         duration: 48,
         price: 30000.0,
-        image: '',
+        image: 'https://imagens.grupointegrado.br/img/banners/1649363119000000.png',
     },
     {
         name: 'Engenharia Elétrica',
